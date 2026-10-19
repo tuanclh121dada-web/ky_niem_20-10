@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chúc Mừng 20/10 Công Chúa Của Anh 💖</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #fff0f5 0%, #ffe4e8 50%, #ffd1dc 100%);
+      overflow-x: hidden;
+      color: #5c3a47;
+    }
+    .font-handwriting {
+      font-family: 'Dancing Script', cursive;
+    }
+    /* Hiệu ứng cánh hoa/trái tim rơi */
+    .floating-item {
+      position: fixed;
+      top: -10%;
+      user-select: none;
+      pointer-events: none;
+      z-index: 10;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) translateX(0px);
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateY(50vh) rotate(180deg) translateX(25px);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg) translateX(-25px);
+        opacity: 0.2;
+      }
+    }
+    .envelope-wrapper {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .polaroid {
+      background: white;
+      padding: 12px 12px 28px 12px;
+      box-shadow: 0 10px 25px rgba(219, 112, 147, 0.2);
+      transition: all 0.35s ease;
+    }
+    .polaroid:hover {
+      transform: translateY(-8px) rotate(0deg) !important;
+      box-shadow: 0 15px 35px rgba(219, 112, 147, 0.35);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body class="min-h-screen relative pb-20">
+
+  <!-- Container cánh hoa rơi -->
+  <div id="petals-container"></div>
+
+  <!-- HERO SECTION & BỘ ĐẾM NGÀY YÊU TỪ 1/6 -->
+  <header class="pt-16 pb-12 px-4 text-center max-w-4xl mx-auto relative z-20">
+    <div class="inline-block bg-pink-100 text-pink-600 px-4 py-1.5 rounded-full text-sm font-bold mb-4 shadow-sm border border-pink-200">
+      🌸 Happy Vietnamese Women's Day 20/10 🌸
+    </div>
+    <h1 class="font-handwriting text-5xl sm:text-7xl text-pink-600 drop-shadow-sm mb-4">
+      Gửi Em Yêu Của Anh!
+    </h1>
+    <p class="text-lg sm:text-xl text-pink-800/80 max-w-2xl mx-auto mb-8 font-medium">
+      Cảm ơn em đã đến bên anh từ ngày 01/06 và biến mỗi ngày bình thường trở thành một ngày ngập tràn hạnh phúc.
+    </p>
+
+    <!-- Bộ đếm thời gian bên nhau từ 1/6/2026 -->
+    <div class="glass-card rounded-3xl p-6 sm:p-8 shadow-xl max-w-2xl mx-auto border-2 border-pink-200/60">
+      <p class="text-sm uppercase tracking-widest text-pink-500 font-bold mb-1">
+        Hành trình bên nhau 💕
+      </p>
+      <p class="text-xs text-pink-400 font-semibold mb-4">
+        Bắt đầu từ ngày 01/06/2026 ✨
+      </p>
+      
+      <div class="grid grid-cols-4 gap-3 sm:gap-6 text-center">
+        <div class="bg-gradient-to-b from-pink-50 to-pink-100/80 p-3 sm:p-4 rounded-2xl border border-pink-200">
+          <div id="days-count" class="text-3xl sm:text-5xl font-bold text-pink-600">0</div>
+          <div class="text-xs sm:text-sm text-pink-500 font-semibold mt-1">Ngày</div>
+        </div>
+        <div class="bg-gradient-to-b from-pink-50 to-pink-100/80 p-3 sm:p-4 rounded-2xl border border-pink-200">
+          <div id="hours-count" class="text-3xl sm:text-5xl font-bold text-pink-600">0</div>
+          <div class="text-xs sm:text-sm text-pink-500 font-semibold mt-1">Giờ</div>
+        </div>
+        <div class="bg-gradient-to-b from-pink-50 to-pink-100/80 p-3 sm:p-4 rounded-2xl border border-pink-200">
+          <div id="minutes-count" class="text-3xl sm:text-5xl font-bold text-pink-600">0</div>
+          <div class="text-xs sm:text-sm text-pink-500 font-semibold mt-1">Phút</div>
+        </div>
+        <div class="bg-gradient-to-b from-pink-50 to-pink-100/80 p-3 sm:p-4 rounded-2xl border border-pink-200">
+          <div id="seconds-count" class="text-3xl sm:text-5xl font-bold text-pink-600">0</div>
+          <div class="text-xs sm:text-sm text-pink-500 font-semibold mt-1">Giây</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BỨC THƯ TÌNH 20/10 -->
+  <section class="py-10 px-4 max-w-3xl mx-auto relative z-20">
+    <div class="text-center mb-6">
+      <h2 class="font-handwriting text-4xl text-pink-600">Lá Thư Nhỏ Gửi Em 💌</h2>
+      <p class="text-sm text-pink-500 mt-1">Nhấn vào phong thư bên dưới để mở lời nhắn của anh nhé!</p>
+    </div>
+
+    <!-- Trạng thái đóng -->
+    <div id="envelope-closed" onclick="openLetter()" class="envelope-wrapper max-w-md mx-auto bg-gradient-to-br from-pink-400 to-rose-400 rounded-3xl p-8 text-center text-white shadow-2xl border-4 border-white hover:scale-105 transition transform">
+      <div class="text-6xl mb-3 animate-bounce">💌</div>
+      <h3 class="font-handwriting text-3xl mb-1">Gửi Công Chúa Của Anh</h3>
+      <p class="text-pink-100 text-sm">Chạm nhẹ để mở thư 20/10 ✨</p>
+    </div>
+
+    <!-- Nội dung thư khi mở -->
+    <div id="letter-content" class="hidden glass-card rounded-3xl p-6 sm:p-10 shadow-2xl border-2 border-pink-200 relative">
+      <div class="absolute -top-5 left-1/2 -translate-x-1/2 bg-pink-500 text-white px-5 py-1 rounded-full text-sm font-bold shadow">
+        💖 20/10 Ngọt Ngào 💖
+      </div>
+      <div id="typewriter-text" class="font-handwriting text-2xl sm:text-3xl leading-relaxed text-pink-900 whitespace-pre-line min-h-[160px]"></div>
+      <div class="mt-6 text-right font-handwriting text-2xl text-pink-600">
+        — Yêu em thật nhiều, Anh ❤️
+      </div>
+    </div>
+  </section>
+
+  <!-- KHOẢNH KHẮC POLAROID (CHỜ ADD ẢNH) -->
+  <section class="py-12 px-4 max-w-5xl mx-auto relative z-20">
+    <div class="text-center mb-10">
+      <h2 class="font-handwriting text-4xl sm:text-5xl text-pink-600 mb-2">Khoảnh Khắc Của Chúng Mình 📸</h2>
+      <p class="text-sm text-pink-500">
+        (Những khung kỷ niệm từ ngày 01/06 - Em có thể tải ảnh lên trực tiếp ngay trên web hoặc ghép ảnh vào code sau nhé!)
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+      <!-- Khung ảnh 1 -->
+      <div class="polaroid rounded-xl transform -rotate-2">
+        <label class="cursor-pointer block relative group overflow-hidden rounded-lg aspect-[4/5] bg-pink-50 border-2 border-dashed border-pink-200 flex flex-col items-center justify-center">
+          <img id="img-preview-1" src="" class="hidden w-full h-full object-cover" alt="Kỷ niệm 1" />
+          <div id="placeholder-1" class="text-center p-4">
+            <div class="text-5xl mb-2">💑</div>
+            <p class="text-pink-500 font-semibold text-sm">Từ ngày 01/06 bên nhau</p>
+            <span class="inline-block mt-2 text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">+ Nhấn để chọn ảnh</span>
+          </div>
+          <input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event, 1)" />
+        </label>
+        <p class="font-handwriting text-2xl text-center text-pink-700 mt-4">Nụ cười xinh nhất của em ✨</p>
+      </div>
+
+      <!-- Khung ảnh 2 -->
+      <div class="polaroid rounded-xl transform rotate-1">
+        <label class="cursor-pointer block relative group overflow-hidden rounded-lg aspect-[4/5] bg-pink-50 border-2 border-dashed border-pink-200 flex flex-col items-center justify-center">
+          <img id="img-preview-2" src="" class="hidden w-full h-full object-cover" alt="Kỷ niệm 2" />
+          <div id="placeholder-2" class="text-center p-4">
+            <div class="text-5xl mb-2">🧋🍰</div>
+            <p class="text-pink-500 font-semibold text-sm">Những buổi hẹn hò ngọt ngào</p>
+            <span class="inline-block mt-2 text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">+ Nhấn để chọn ảnh</span>
+          </div>
+          <input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event, 2)" />
+        </label>
+        <p class="font-handwriting text-2xl text-center text-pink-700 mt-4">Đi đâu cũng được, miễn là cùng em 💕</p>
+      </div>
+
+      <!-- Khung ảnh 3 -->
+      <div class="polaroid rounded-xl transform -rotate-1">
+        <label class="cursor-pointer block relative group overflow-hidden rounded-lg aspect-[4/5] bg-pink-50 border-2 border-dashed border-pink-200 flex flex-col items-center justify-center">
+          <img id="img-preview-3" src="" class="hidden w-full h-full object-cover" alt="Kỷ niệm 3" />
+          <div id="placeholder-3" class="text-center p-4">
+            <div class="text-5xl mb-2">💐💖</div>
+            <p class="text-pink-500 font-semibold text-sm">Kỷ niệm 20/10 đáng nhớ</p>
+            <span class="inline-block mt-2 text-xs bg-pink-100 text-pink-600 px-3 py-1 rounded-full">+ Nhấn để chọn ảnh</span>
+          </div>
+          <input type="file" accept="image/*" class="hidden" onchange="loadPhoto(event, 3)" />
+        </label>
+        <p class="font-handwriting text-2xl text-center text-pink-700 mt-4">Mãi bên anh như thế này nhé! 🌸</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HỘP QUÀ VOUCHER TÌNH YÊU -->
+  <section class="py-10 px-4 max-w-3xl mx-auto text-center relative z-20">
+    <div class="glass-card rounded-3xl p-8 shadow-xl border-2 border-pink-200">
+      <div class="text-5xl mb-3">🎁</div>
+      <h2 class="font-handwriting text-4xl text-pink-600 mb-2">Quà Tặng Đặc Quyền 20/10</h2>
+      <p class="text-sm text-pink-600/80 mb-6">Em hãy chọn những "Voucher Tình Yêu" dưới đây và bấm xác nhận để gửi lại cho anh nhé!</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left mb-6">
+        <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-pink-200 cursor-pointer hover:bg-pink-50 transition">
+          <input type="checkbox" value="1 buổi đi ăn món em thích nhất 🍲" class="voucher-cb w-5 h-5 accent-pink-500" checked />
+          <span class="font-semibold text-pink-800">🍲 1 buổi đi ăn món em thích nhất</span>
+        </label>
+        <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-pink-200 cursor-pointer hover:bg-pink-50 transition">
+          <input type="checkbox" value="1 ly trà sữa full topping 🧋" class="voucher-cb w-5 h-5 accent-pink-500" checked />
+          <span class="font-semibold text-pink-800">🧋 1 ly trà sữa full topping</span>
+        </label>
+        <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-pink-200 cursor-pointer hover:bg-pink-50 transition">
+          <input type="checkbox" value="1000 cái ôm & hôn thật chặt 🫂💖" class="voucher-cb w-5 h-5 accent-pink-500" checked />
+          <span class="font-semibold text-pink-800">🫂 1000 cái ôm & hôn thật chặt</span>
+        </label>
+        <label class="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-pink-200 cursor-pointer hover:bg-pink-50 transition">
+          <input type="checkbox" value="1 thẻ chiều chuộng cả ngày 🎟️" class="voucher-cb w-5 h-5 accent-pink-500" />
+          <span class="font-semibold text-pink-800">🎟️ 1 thẻ chiều chuộng cả ngày</span>
+        </label>
+      </div>
+
+      <button onclick="claimVouchers()" class="bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-bold px-8 py-3.5 rounded-full shadow-lg hover:scale-105 transition transform">
+        💝 Chốt Quà & Sao Chép Gửi Anh
+      </button>
+      <p id="copy-status" class="text-xs text-pink-600 font-bold mt-3 hidden"></p>
+    </div>
+  </section>
+
+  <script>
+    // 1. Đồng hồ đếm thời gian từ 01/06/2026
+    const startDate = new Date("2026-06-01T00:00:00");
+    function updateCounter() {
+      const now = new Date();
+      const diff = Math.max(0, now - startDate);
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days-count").innerText = days;
+      document.getElementById("hours-count").innerText = String(hours).padStart(2, "0");
+      document.getElementById("minutes-count").innerText = String(minutes).padStart(2, "0");
+      document.getElementById("seconds-count").innerText = String(seconds).padStart(2, "0");
+    }
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    // 2. Mở phong thư & gõ chữ
+    const letterMessage = `Chúc mừng ngày 20/10 công chúa nhỏ của anh! 🌸
+Từ ngày 1/6 định mệnh ấy đến nay, chúng mình đã cùng nhau đi qua quãng thời gian thật ngọt ngào. Cảm ơn em vì luôn dịu dàng, đáng yêu và ở bên cạnh anh.
+
+Chúc em ngày 20/10 luôn xinh đẹp rạng rỡ, ngập tràn niềm vui và mãi nắm chặt tay anh trên chặng đường phía trước nhé!`;
+
+    let isOpened = false;
+    function openLetter() {
+      document.getElementById("envelope-closed").style.display = "none";
+      document.getElementById("letter-content").classList.remove("hidden");
+
+      confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
+
+      if (!isOpened) {
+        isOpened = true;
+        let el = document.getElementById("typewriter-text");
+        let i = 0;
+        let timer = setInterval(() => {
+          if (i < letterMessage.length) {
+            el.innerHTML += letterMessage.charAt(i);
+            i++;
+          } else {
+            clearInterval(timer);
+          }
+        }, 30);
+      }
+    }
+
+    // 3. Tải ảnh lên các khung Polaroid
+    function loadPhoto(event, index) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.getElementById(`img-preview-${index}`);
+        const placeholder = document.getElementById(`placeholder-${index}`);
+        img.src = e.target.result;
+        img.classList.remove("hidden");
+        placeholder.classList.add("hidden");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // 4. Sao chép Voucher quà
+    function claimVouchers() {
+      const checked = Array.from(document.querySelectorAll(".voucher-cb:checked")).map(cb => cb.value);
+      const text = `💖 Em đã chốt quà 20/10 gồm: ${checked.join(", ")}! Yêu anh nhiều lắm! 🌸`;
+      navigator.clipboard.writeText(text).catch(() => {});
+      confetti({ particleCount: 70, spread: 60, origin: { y: 0.7 } });
+      const status = document.getElementById("copy-status");
+      status.innerText = "✅ Đã sao chép danh sách quà! Em chỉ cần dán (Paste) gửi vào tin nhắn cho anh nhé!";
+      status.classList.remove("hidden");
+    }
+
+    // 5. Hiệu ứng cánh hoa & trái tim rơi
+    const symbols = ["🌸", "💖", "🌷", "✨", "💕"];
+    const container = document.getElementById("petals-container");
+    for (let i = 0; i < 18; i++) {
+      let span = document.createElement("span");
+      span.className = "floating-item";
+      span.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.fontSize = (Math.random() * 14 + 14) + "px";
+      span.style.animationDuration = (Math.random() * 6 + 7) + "s";
+      span.style.animationDelay = (Math.random() * 5) + "s";
+      container.appendChild(span);
+    }
+  </script>
+</body>
+</html>
